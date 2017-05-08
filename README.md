@@ -1,0 +1,1 @@
+Windows Phone 8.1 app for http://cs.sumdu.edu.ua/
