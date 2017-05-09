@@ -50,13 +50,17 @@ namespace CSSumdu
             Schedule sc = new Schedule();
 
             await db.init();
-            
-            Task[] tasks = new Task[3];
-            tasks[0] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
-            tasks[1] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getTeachers", "INSERT INTO teachers (id, name) VALUES");
-            tasks[2] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getAuditoriums", "INSERT INTO auditoriums (id, name) VALUES");
 
-            await Task.WhenAll(tasks);
+            await sc.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
+            
+            //Task[] tasks = new Task[3];
+            //tasks[0] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
+            //tasks[1] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getTeachers", "INSERT INTO teachers (id, name) VALUES");
+            //tasks[2] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getAuditoriums", "INSERT INTO auditoriums (id, name) VALUES");
+
+            //await Task.WhenAll(tasks);
+
+            var d = DP.Date;
         }
     }
 }
