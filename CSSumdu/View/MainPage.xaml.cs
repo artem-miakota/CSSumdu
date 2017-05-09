@@ -46,12 +46,9 @@ namespace CSSumdu
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
 
-            DB db = new DB();
-            Schedule sc = new Schedule();
+            await DB.Instance.init();
 
-            await db.init();
-
-            await sc.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
+            await Schedule.Instance.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
             
             //Task[] tasks = new Task[3];
             //tasks[0] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");

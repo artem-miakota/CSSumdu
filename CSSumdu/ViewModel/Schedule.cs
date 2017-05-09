@@ -11,6 +11,22 @@ namespace CSSumdu.ViewModel
 {
     class Schedule
     {
+        private static Schedule instance;
+
+        private Schedule() { }
+
+        public static Schedule Instance
+        {
+            get 
+            {
+                if (instance == null)
+                {
+                    instance = new Schedule();
+                }
+                return instance;
+            }
+        }
+
         public async Task getList(String url, String SBPrefix)
         {
             try
@@ -20,7 +36,6 @@ namespace CSSumdu.ViewModel
 
                 Dictionary<int, String> list = JsonConvert.DeserializeObject<Dictionary<int, String>>(ResponseString);
 
-                DB db = new DB();
                 StringBuilder query = new StringBuilder(SBPrefix);
                 foreach (KeyValuePair<int, String> entry in list)
                 {
@@ -28,7 +43,7 @@ namespace CSSumdu.ViewModel
                 }
                 query[query.Length - 1] = ';';
 
-                await db.getConnetion().QueryAsync<Group>(query.ToString());
+                await DB.Instance.getConnetion().QueryAsync<Group>(query.ToString());
             }
             catch { }
         }
@@ -48,7 +63,6 @@ namespace CSSumdu.ViewModel
 
                 List<TEvent> list = JsonConvert.DeserializeObject<List<TEvent>>(ResponseString);
 
-                DB db = new DB();
                 StringBuilder query = new StringBuilder("INSERT INTO Events (START_TIME, NAME_FIO, NAME_AUD, NAME_GROUP, ABBR_DISC, NAME_STUD, REASON) VALUES");
                 foreach (TEvent entry in list)
                 {
@@ -68,7 +82,7 @@ namespace CSSumdu.ViewModel
                 }
                 query[query.Length - 1] = ';';
 
-                await db.getConnetion().QueryAsync<Group>(query.ToString());
+                await DB.Instance.getConnetion().QueryAsync<Group>(query.ToString());
             }
             catch { }
         }

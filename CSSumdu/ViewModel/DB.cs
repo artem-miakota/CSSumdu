@@ -10,6 +10,22 @@ namespace CSSumdu.ViewModel
 {
     class DB
     {
+        private static DB instance;
+
+        private DB() { }
+
+        public static DB Instance
+        {
+            get 
+            {
+                if (instance == null)
+                {
+                    instance = new DB();
+                }
+                return instance;
+            }
+        }
+
         private static SQLiteAsyncConnection conn;
 
         public async Task init()
