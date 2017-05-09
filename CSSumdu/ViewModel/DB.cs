@@ -10,20 +10,20 @@ namespace CSSumdu.ViewModel
 {
     class DB
     {
-        private SQLiteAsyncConnection conn;
+        private static SQLiteAsyncConnection conn;
 
         public async Task init()
         {
             conn = new SQLiteAsyncConnection("cssumdu.db");
             await conn.CreateTableAsync<Event>();
+            await conn.CreateTableAsync<Group>();
+            await conn.CreateTableAsync<Teacher>();
+            await conn.CreateTableAsync<Auditorium>();
         }
 
-        public async Task addOne()
+        public SQLiteAsyncConnection getConnetion()
         {
-            Event e = new Event();
-            e.name = "eventTest";
-
-            await conn.InsertAsync(e);
+            return conn;
         }
     }
 }

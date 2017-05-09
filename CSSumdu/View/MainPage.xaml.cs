@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -46,8 +47,16 @@ namespace CSSumdu
             // this event is handled for you.
 
             DB db = new DB();
+            Schedule sc = new Schedule();
+
             await db.init();
-            await db.addOne();
+            
+            Task[] tasks = new Task[3];
+            tasks[0] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
+            tasks[1] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getTeachers", "INSERT INTO teachers (id, name) VALUES");
+            tasks[2] = sc.getList("http://schedule.sumdu.edu.ua/index/json?method=getAuditoriums", "INSERT INTO auditoriums (id, name) VALUES");
+
+            await Task.WhenAll(tasks);
         }
     }
 }
