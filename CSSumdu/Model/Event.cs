@@ -1,9 +1,5 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSSumdu.Model
 {
@@ -11,9 +7,6 @@ namespace CSSumdu.Model
     class Event
     {
         [PrimaryKey]
-        //public int id { get; set; }
-        //public String DATE_REG { get; set; }
-        //public String TIME_PAIR { get; set; }
         public long START_TIME { get; set; }
 
         [Indexed]
