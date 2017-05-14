@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="CSSumdu.View.ScheduleViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CSSumdu.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ListBox x:Name="ListBox1" Margin="5" Width="450" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <TextBlock Text="START_TIME:" Margin="2" />
+                        <TextBlock Text="{Binding START_TIME}" Margin="2" />
+                        <TextBlock Text="ABBR_DISC:" Margin="10,2,0,2" />
+                        <TextBlock Text="{Binding ABBR_DISC}" Margin="2" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

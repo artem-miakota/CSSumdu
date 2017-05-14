@@ -9,6 +9,10 @@ namespace CSSumdu.Model
         [PrimaryKey]
         public long START_TIME { get; set; }
 
+        public String DATE_REG { get; set; }
+
+        public String TIME_PAIR { get; set; }
+
         [Indexed]
         public String NAME_FIO { get; set; }
 
@@ -23,6 +27,5 @@ namespace CSSumdu.Model
         public String NAME_STUD { get; set; }
 
         public String REASON { get; set; }
-
     }
 }

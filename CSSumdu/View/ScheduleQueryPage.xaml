@@ -58,9 +58,9 @@
     <Grid>
         <DatePicker HorizontalAlignment="Left" Margin="46,41,0,0" VerticalAlignment="Top"/>
         <DatePicker HorizontalAlignment="Left" Margin="46,120,0,0" VerticalAlignment="Top"/>
-        <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,100,0,9.5" Tag="groups"/>
-        <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,200,0,9.5" Tag="teachers"/>
-        <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,300,0,9.5" Tag="Auditoriums"/>
-        <Button x:Name="b" Content="Button" HorizontalAlignment="Left" Margin="155,231,0,0" VerticalAlignment="Top"/>
+        <AutoSuggestBox x:Name="gr" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,100,0,9.5" Tag="groups"/>
+        <AutoSuggestBox x:Name="te" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,200,0,9.5" Tag="teachers"/>
+        <AutoSuggestBox x:Name="au" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,300,0,9.5" Tag="Auditoriums"/>
+        <Button x:Name="b" Content="Button" HorizontalAlignment="Left" Margin="155,231,0,0" VerticalAlignment="Top" Click="b_Click"/>
     </Grid>
 </Page>

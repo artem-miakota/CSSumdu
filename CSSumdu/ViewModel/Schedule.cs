@@ -60,10 +60,10 @@ namespace CSSumdu.ViewModel
                 HttpClient httpClient = new HttpClient();
                 String ResponseString = await httpClient.GetStringAsync(new Uri(url.ToString()));
 
-                List<TEvent> list = JsonConvert.DeserializeObject<List<TEvent>>(ResponseString);
+                List<Event> list = JsonConvert.DeserializeObject<List<Event>>(ResponseString);
 
-                StringBuilder query = new StringBuilder("INSERT INTO Events (START_TIME, NAME_FIO, NAME_AUD, NAME_GROUP, ABBR_DISC, NAME_STUD, REASON) VALUES");
-                foreach (TEvent entry in list)
+                StringBuilder query = new StringBuilder("INSERT INTO Events (START_TIME, DATE_REG, TIME_PAIR, NAME_FIO, NAME_AUD, NAME_GROUP, ABBR_DISC, NAME_STUD, REASON) VALUES");
+                foreach (Event entry in list)
                 {
                     var date = entry.DATE_REG.Split('.');
                     char[] array = { ':', '-' };
@@ -71,7 +71,9 @@ namespace CSSumdu.ViewModel
                     DateTimeOffset d = new DateTimeOffset(Int32.Parse(date[2]), Int32.Parse(date[1]),
                         Int32.Parse(date[0]), Int32.Parse(time[0]), Int32.Parse(time[1]), 0, new TimeSpan());
                     query.Append(" (" + d.Ticks +
-                        ", \"" + entry.NAME_FIO +
+                        ", \"" + entry.DATE_REG +
+                        "\", \"" + entry.TIME_PAIR +
+                        "\", \"" + entry.NAME_FIO +
                         "\", \"" + entry.NAME_AUD +
                         "\", \"" + entry.NAME_GROUP +
                         "\", \"" + entry.ABBR_DISC +
@@ -81,49 +83,50 @@ namespace CSSumdu.ViewModel
                 }
                 query[query.Length - 1] = ';';
 
-                await DB.Instance.getConnetion().QueryAsync<Group>(query.ToString());
+                await DB.Instance.getConnetion().QueryAsync<Event>("DELETE FROM events");
+                await DB.Instance.getConnetion().QueryAsync<Event>(query.ToString());
             }
             catch { }
         }
 
-        private class TEvent
-        {
-            public String DATE_REG;
-            public String NAME_WDAY;
-            public String NAME_PAIR;
-            public String TIME_PAIR;
-            public String NAME_FIO;
-            public String NAME_AUD;
-            public String NAME_GROUP;
-            public String ABBR_DISC;
-            public String NAME_STUD;
-            public String REASON;
-            public String PUB_DATE;
-            public String KOD_STUD;
-            public String KOD_FIO;
-            public String KOD_AUD;
-            public String KOD_DISC;
-            public String INFO;
+        //private class TEvent
+        //{
+        //    public String DATE_REG;
+        //    public String NAME_WDAY;
+        //    public String NAME_PAIR;
+        //    public String TIME_PAIR;
+        //    public String NAME_FIO;
+        //    public String NAME_AUD;
+        //    public String NAME_GROUP;
+        //    public String ABBR_DISC;
+        //    public String NAME_STUD;
+        //    public String REASON;
+        //    public String PUB_DATE;
+        //    public String KOD_STUD;
+        //    public String KOD_FIO;
+        //    public String KOD_AUD;
+        //    public String KOD_DISC;
+        //    public String INFO;
 
-            public TEvent()
-            {
-                DATE_REG = null;
-                NAME_WDAY = null;
-                NAME_PAIR = null;
-                TIME_PAIR = null;
-                NAME_FIO = null;
-                NAME_AUD = null;
-                NAME_GROUP = null;
-                ABBR_DISC = null;
-                NAME_STUD = null;
-                REASON = null;
-                PUB_DATE = null;
-                KOD_STUD = null;
-                KOD_FIO = null;
-                KOD_AUD = null;
-                KOD_DISC = null;
-                INFO = null;            
-            }
-        }
+        //    public TEvent()
+        //    {
+        //        DATE_REG = null;
+        //        NAME_WDAY = null;
+        //        NAME_PAIR = null;
+        //        TIME_PAIR = null;
+        //        NAME_FIO = null;
+        //        NAME_AUD = null;
+        //        NAME_GROUP = null;
+        //        ABBR_DISC = null;
+        //        NAME_STUD = null;
+        //        REASON = null;
+        //        PUB_DATE = null;
+        //        KOD_STUD = null;
+        //        KOD_FIO = null;
+        //        KOD_AUD = null;
+        //        KOD_DISC = null;
+        //        INFO = null;            
+        //    }
+        //}
     }
 }

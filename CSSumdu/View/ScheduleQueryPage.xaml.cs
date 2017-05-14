@@ -51,5 +51,14 @@ namespace CSSumdu.View
             public int id { get; set; }
             public String name { get; set; }
         }
+
+        private async void b_Click(object sender, RoutedEventArgs e)
+        {
+            int group = (gr.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM groups WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
+            var teacher = (te.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM teachers WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
+            var auditor = (au.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM auditoriums WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
+            await Schedule.Instance.getSchedule(group, teacher, auditor, new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 6, 1, 0, 0, 0, new TimeSpan()));
+            Frame.Navigate(typeof(ScheduleViewPage));
+        }
     }
 }

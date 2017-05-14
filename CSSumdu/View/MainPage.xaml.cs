@@ -1,5 +1,6 @@
 ﻿using CSSumdu.View;
 using CSSumdu.ViewModel;
+using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,7 +21,7 @@ namespace CSSumdu
         {
             await DB.Instance.init();
 
-            //await Schedule.Instance.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
+            await Schedule.Instance.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
 
             Task[] tasks = new Task[3];
             tasks[0] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
