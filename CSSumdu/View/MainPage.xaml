@@ -12,5 +12,23 @@
         <Button Content="Button" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="Button_Click"/>
         <DatePicker x:Name="DP" HorizontalAlignment="Left" Margin="0,104,0,0" VerticalAlignment="Top" Height="50" Width="213"/>
 
+        <FlipView x:Name="flipViewVertical" 
+          BorderBrush="Black" BorderThickness="3" Height="100" VerticalAlignment="Bottom">
+
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="150" Stretch="None" Source="{Binding Path=Summary.Text}"/>
+                        <HyperlinkButton Grid.Column="0" Width="150" Height="100" NavigateUri="{Binding Path=Id}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Title.Text}" FontFamily="Segoe UI" Padding="20" TextWrapping="WrapWholeWords"/>
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
     </Grid>
 </Page>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Syndication;
 
 namespace CSSumdu
 {
@@ -13,7 +14,6 @@ namespace CSSumdu
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -21,7 +21,7 @@ namespace CSSumdu
         {
             await DB.Instance.init();
 
-            await Schedule.Instance.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
+            //await Schedule.Instance.getSchedule(100807, 0, 0, new DateTimeOffset(2017, 1, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()));
 
             Task[] tasks = new Task[3];
             tasks[0] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
@@ -29,11 +29,27 @@ namespace CSSumdu
             tasks[2] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getAuditoriums", "INSERT INTO auditoriums (id, name) VALUES");
 
             await Task.WhenAll(tasks);
+
+            await GetSSUNews();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ScheduleQueryPage));
+        }
+
+        private async Task GetSSUNews()
+        {
+            SyndicationClient client = new SyndicationClient();
+            SyndicationFeed feed = await client.RetrieveFeedAsync(new Uri("http://sumdu.edu.ua/ukr/component/content/category/12-news.feed"));
+            if (feed != null)
+            {
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    item.Summary.Text = item.Summary.Text.Split('"')[5];
+                    flipViewVertical.Items.Add(item);
+                }
+            }
         }
     }
 }
