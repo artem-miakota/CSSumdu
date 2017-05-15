@@ -9,26 +9,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="Button_Click"/>
-        <DatePicker x:Name="DP" HorizontalAlignment="Left" Margin="0,104,0,0" VerticalAlignment="Top" Height="50" Width="213"/>
+        <ListView>
+            <TextBlock Text="Кафедра комп'ютерних наук" FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Padding="30,0,30,30" Width="Auto" />
 
-        <FlipView x:Name="flipViewVertical" 
-          BorderBrush="Black" BorderThickness="3" Height="100" VerticalAlignment="Bottom">
+            <FlipView x:Name="flipView" Height="100" VerticalAlignment="Top" Padding="20,0" Margin="0">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="150" Stretch="None" Source="{Binding Path=Summary.Text}"/>
+                            <HyperlinkButton Grid.Column="0" Width="150" Height="100" NavigateUri="{Binding Path=Id}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Title.Text}" FontFamily="Segoe UI" Padding="20, 0, 0, 0" TextWrapping="WrapWholeWords" FontSize="16" MaxLines="4" VerticalAlignment="Center"/>
+                            <HyperlinkButton Grid.Column="1" Width="150" Height="100" NavigateUri="{Binding Path=Id}"/>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+            <TextBlock Text="Останні новини" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="20,0,20,30" />
 
-            <FlipView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="150" Stretch="None" Source="{Binding Path=Summary.Text}"/>
-                        <HyperlinkButton Grid.Column="0" Width="150" Height="100" NavigateUri="{Binding Path=Id}"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Title.Text}" FontFamily="Segoe UI" Padding="20" TextWrapping="WrapWholeWords"/>
-                    </Grid>
-                </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>
+            <ListView x:Name="mainView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Hidden" Tapped="mainView_Tapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding header}" TextAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Padding="25,10" FontSize="{StaticResource TextStyleExtraLargeFontSize}" FontWeight="SemiBold" LineStackingStrategy="BlockLineHeight" LineHeight="{StaticResource TextStyleExtraLargeFontSize}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ListView>
+
 
     </Grid>
 </Page>

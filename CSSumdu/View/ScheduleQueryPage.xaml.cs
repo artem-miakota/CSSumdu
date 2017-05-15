@@ -2,8 +2,10 @@
 using CSSumdu.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -18,8 +20,15 @@ namespace CSSumdu.View
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            end.Date = start.Date.AddDays(7);
+
+            var eventList = await DB.Instance.getConnetion().Table<Event>().ToListAsync();
+            eventList.Sort((x, y) => x.START_TIME.CompareTo(y.START_TIME));
+
+            ObservableCollection<Event> bindedList = new ObservableCollection<Event>(eventList);
+            ListBox.DataContext = bindedList;
         }
 
         private async void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -54,11 +63,27 @@ namespace CSSumdu.View
 
         private async void b_Click(object sender, RoutedEventArgs e)
         {
-            int group = (gr.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM groups WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
-            var teacher = (te.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM teachers WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
-            var auditor = (au.Text == "")? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM auditoriums WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
-            await Schedule.Instance.getSchedule(group, teacher, auditor, new DateTimeOffset(2017, 4, 1, 0, 0, 0, new TimeSpan()), new DateTimeOffset(2017, 6, 1, 0, 0, 0, new TimeSpan()));
-            Frame.Navigate(typeof(ScheduleViewPage));
+            StatusBarProgressIndicator progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+            
+            int group = (gr.Text == "") ? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM groups WHERE name=\"" + gr.Text + "\" LIMIT 1;"))[0].id;
+            int teacher = (te.Text == "") ? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM teachers WHERE name=\"" + te.Text + "\" LIMIT 1;"))[0].id;
+            int auditor = (au.Text == "") ? 0 : (await DB.Instance.getConnetion().QueryAsync<Pair>("SELECT id FROM auditoriums WHERE name=\"" + au.Text + "\" LIMIT 1;"))[0].id;
+            if (group != 0 | teacher != 0 | auditor != 0)
+            {
+                await progressbar.ShowAsync();
+                await Schedule.Instance.getSchedule(group, teacher, auditor, start.Date, end.Date);
+
+                var eventList = await DB.Instance.getConnetion().Table<Event>().ToListAsync();
+                eventList.Sort((x, y) => x.START_TIME.CompareTo(y.START_TIME));
+
+                ObservableCollection<Event> bindedList = new ObservableCollection<Event>(eventList);
+                ListBox.DataContext = bindedList;
+
+                await progressbar.HideAsync();
+            }
+
+
+
         }
     }
 }

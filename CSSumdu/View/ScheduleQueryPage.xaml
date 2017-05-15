@@ -56,11 +56,29 @@
     </Page.Resources>
 
     <Grid>
-        <DatePicker HorizontalAlignment="Left" Margin="46,41,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="46,120,0,0" VerticalAlignment="Top"/>
-        <AutoSuggestBox x:Name="gr" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,100,0,9.5" Tag="groups"/>
-        <AutoSuggestBox x:Name="te" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,200,0,9.5" Tag="teachers"/>
-        <AutoSuggestBox x:Name="au" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="0,300,0,9.5" Tag="Auditoriums"/>
-        <Button x:Name="b" Content="Button" HorizontalAlignment="Left" Margin="155,231,0,0" VerticalAlignment="Top" Click="b_Click"/>
+        <ListView>
+            <StackPanel>
+                <TextBlock Margin="13,13,13,0" Text="Розклад" FontSize="{StaticResource TextStyleLargeFontSize}"/>
+                <AutoSuggestBox x:Name="gr" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="groups" PlaceholderText="Група"/>
+                <AutoSuggestBox x:Name="te" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="teachers" PlaceholderText="Викладач"/>
+                <AutoSuggestBox x:Name="au" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="Auditoriums" PlaceholderText="Аудиторiя"/>
+                <DatePicker x:Name="start" Margin="12,0"/>
+                <DatePicker x:Name="end" Margin="12,0"/>
+                <Button x:Name="b" Width="Auto" Content="Запит" Margin="10,0" Click="b_Click" HorizontalAlignment="Stretch"/>
+
+                <ListView x:Name="ListBox" Margin="5" Width="Auto" HorizontalAlignment="Left" ItemsSource="{Binding}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="2">
+                                <TextBlock Text="START_TIME:" Margin="2" />
+                                <TextBlock Text="{Binding START_TIME}" Margin="2" />
+                                <TextBlock Text="ABBR_DISC:" Margin="10,2,0,2" />
+                                <TextBlock Text="{Binding ABBR_DISC}" Margin="2" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ListView>
     </Grid>
 </Page>

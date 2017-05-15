@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="CSSumdu.View.SpecialtyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CSSumdu.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Style="{StaticResource header_style}"
+                           Text="Інформація про спеціальності"/>
+                <TextBlock Style="{StaticResource plain_text_style}"
+                           Text="&#xa0; Спеціальність «Інформаційні технології проектування» акредитована за 4-м рівнем акредитації (ліцензія Міністерства освіти і науки України АВ №395899 від 29.07.2008 р.). Секція інформаційних технологій проектування (ІТП), яка входить до складу кафедри комп'ютерних наук, здійснює підготовку фахівців кваліфікаційних рівнів:
+&#x0a;&#xa0; - «бакалавр» - за напрямом 6.050101 «Комп'ютерні науки» з терміном навчання 4 роки;
+&#x0a;&#xa0; - «спеціаліст» - за спеціальністю 7.080402 «Інформаційні технології проектування» з терміном навчання 1 рік, присвоюється кваліфікація «Інженер із застосування комп'ютерів»;
+&#x0a;&#xa0; - «магістр» - за спеціальністю 8.080402 «Інформаційні технології проектування» з терміном навчання 1 рік, присвоюється кваліфікація «Аналітик комп'ютерних систем».
+&#x0a;&#xa0; Підготовка спеціалістів та магістрів за спеціальністю «Інформаційні технології проектування» здійснюється за денною та заочною формами навчання за профілізаціями: 'Інформаційні технології проектування' та 'Технології обробки інформації'."/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

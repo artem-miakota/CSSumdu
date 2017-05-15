@@ -106,8 +106,8 @@
     <Compile Include="View\ScheduleQueryPage.xaml.cs">
       <DependentUpon>ScheduleQueryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ScheduleViewPage.xaml.cs">
-      <DependentUpon>ScheduleViewPage.xaml</DependentUpon>
+    <Compile Include="View\SpecialtyPage.xaml.cs">
+      <DependentUpon>SpecialtyPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ScheduleViewPage.xaml">
+    <Page Include="View\SpecialtyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
