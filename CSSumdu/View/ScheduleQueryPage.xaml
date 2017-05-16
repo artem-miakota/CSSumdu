@@ -57,28 +57,51 @@
 
     <Grid>
         <ListView>
-            <StackPanel>
-                <TextBlock Margin="13,13,13,0" Text="Розклад" FontSize="{StaticResource TextStyleLargeFontSize}"/>
-                <AutoSuggestBox x:Name="gr" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="groups" PlaceholderText="Група"/>
-                <AutoSuggestBox x:Name="te" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="teachers" PlaceholderText="Викладач"/>
-                <AutoSuggestBox x:Name="au" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="Auditoriums" PlaceholderText="Аудиторiя"/>
-                <DatePicker x:Name="start" Margin="12,0"/>
-                <DatePicker x:Name="end" Margin="12,0"/>
-                <Button x:Name="b" Width="Auto" Content="Запит" Margin="10,0" Click="b_Click" HorizontalAlignment="Stretch"/>
+            <Grid Width="400">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Width="Auto">
+                    <TextBlock Margin="13,13,13,0" Text="Розклад" FontSize="{StaticResource TextStyleLargeFontSize}"/>
+                    <AutoSuggestBox x:Name="gr" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="groups" PlaceholderText="Група"/>
+                    <AutoSuggestBox x:Name="te" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="teachers" PlaceholderText="Викладач"/>
+                    <AutoSuggestBox x:Name="au" TextChanged="AutoSuggestBox_TextChanged" SuggestionChosen="AutoSuggestBox_SuggestionChosen" GotFocus="AutoSuggestBox_GotFocus" Margin="10,9.5" Tag="Auditoriums" PlaceholderText="Аудиторiя"/>
+                    <DatePicker x:Name="start" Margin="12,0"/>
+                    <DatePicker x:Name="end" Margin="12,0"/>
+                    <Button x:Name="b" Width="Auto" Content="Запит" Margin="10,0" Click="b_Click" HorizontalAlignment="Stretch"/>
 
-                <ListView x:Name="ListBox" Margin="5" Width="Auto" HorizontalAlignment="Left" ItemsSource="{Binding}" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <TextBlock Text="START_TIME:" Margin="2" />
-                                <TextBlock Text="{Binding START_TIME}" Margin="2" />
-                                <TextBlock Text="ABBR_DISC:" Margin="10,2,0,2" />
-                                <TextBlock Text="{Binding ABBR_DISC}" Margin="2" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
+                    <ListView x:Name="ListBox" Width="Auto" HorizontalAlignment="Left" ItemsSource="{Binding}" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="390">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" FontSize="{StaticResource TextStyleLargeFontSize}" Text="{Binding ABBR_DISC}" FontWeight="ExtraBold" Margin="10,5,10,0"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding NAME_STUD}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding DATE_REG}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                                        <TextBlock Text="{Binding TIME_PAIR}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Row="3" Text="{Binding NAME_GROUP}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="4" Text="{Binding NAME_FIO}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="5" Text="{Binding NAME_AUD}" Margin="10,0" FontSize="{StaticResource TextStyleMediumFontSize}" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="6" Text="{Binding REASON}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,0,10,10"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
         </ListView>
     </Grid>
 </Page>

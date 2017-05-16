@@ -22,14 +22,13 @@ namespace CSSumdu
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             await DB.Instance.init();
+            await GetSSUNews();
 
             Task[] tasks = new Task[3];
             tasks[0] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getGroups", "INSERT INTO groups (id, name) VALUES");
             tasks[1] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getTeachers", "INSERT INTO teachers (id, name) VALUES");
             tasks[2] = Schedule.Instance.getList("http://schedule.sumdu.edu.ua/index/json?method=getAuditoriums", "INSERT INTO auditoriums (id, name) VALUES");
             await Task.WhenAll(tasks);
-
-            await GetSSUNews();
         }
 
         private async Task GetSSUNews()
@@ -71,7 +70,7 @@ namespace CSSumdu
 
             mainView.Items.Add(new MenuItem()
             {
-                header = "Інформація про спеціальність",
+                header = "Інформація про спеціальності",
                 type = typeof(SpecialtyPage),
             });
 
