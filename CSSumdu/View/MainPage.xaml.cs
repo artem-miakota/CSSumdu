@@ -74,6 +74,36 @@ namespace CSSumdu
                 type = typeof(SpecialtyPage),
             });
 
+            mainView.Items.Add(new MenuItem()
+            {
+                header = "Історія кафедри",
+                type = typeof(HistoryPage),
+            });
+
+            mainView.Items.Add(new MenuItem()
+            {
+                header = "Науково-дослідна робота",
+                type = typeof(ResearchPage),
+            });
+
+            mainView.Items.Add(new MenuItem()
+            {
+                header = "Міжнародне співробітництво",
+                type = typeof(InternationalPage),
+            });
+
+            mainView.Items.Add(new MenuItem()
+            {
+                header = "Структурні підрозділи кафедри",
+                type = typeof(SubdivisionsPage),
+            });
+
+            mainView.Items.Add(new MenuItem()
+            {
+                header = "Проходження практики",
+                type = typeof(PracticePage),
+            });
+
         }
     }
 }
